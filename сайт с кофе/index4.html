@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Cofee Blog</h1>
+    <form>
+
+            Название напитка <input  id="title" name="title" type="text"> <br>
+            Сорт кофе  <select id="sort" name="sort">
+                <option>Гватемала</option> 
+                <option>че то еще</option> 
+                <option>Другое</option>
+            </select> <br>
+            Крепость обжарки  Крепкая <input type="radio" value="3" name="strong">
+                              Средняя <input type="radio" value="2" name="strong">
+                              Легкая <input type="radio" value="1" name="strong"> <br>
+            Изображение <input type="text" id="immage" name="image" placeholder="http..че то там"><br>
+            Стоимость напитка <input type="text" id="cost" name="cost" placeholder="100"> <br>
+            Описание <input type="text" id="description" name="description" placeholder="Немного про напиток"><br>
+            <input type="submit" value="Добавить напиток"><br>
+            
+                              
+    </form>
+    <br>
+    <table id="table">
+        <tr>Изображение</tr>
+        <tr>Название</tr>
+        <tr>Сорт</tr>
+        <tr>Крепость обжарки</tr>
+        <tr>Стоимость</tr>
+        <tr>Описание</tr>
+        <script> const f = document.forms[0]; 
+            let tr = document.getElementById("table"); 
+            let t = tr; 
+            f.addEventListener("submit", (e) => { 
+                e.preventDefault(); 
+                let body = {}; 
+                for (let i = 0; i < f.elements.length; i++) { 
+                    let tag = f[i]; 
+                    if (tag.name) { 
+                        if (tag.type === "radio" && tag.checked) { 
+                            body[tag.name] = tag.value; 
+                        } else if (tag.type !== "radio") { 
+                            body[tag.name] = tag.value; 
+                        } 
+                    } 
+                } 
+                console.log(body); 
+                let html = "<tr>"; 
+                html += `<td><img src="${body.image}" width="50" alt="${body.title}"></td>`; 
+                html += `<td>${body.title || ""}</td>`; 
+                html += `<td>${body.sort || ""}</td>`; 
+                html += `<td>${body.strong || ""}</td>`; 
+                html += `<td>${body.cost || ""}</td>`; 
+                html += `<td>${body.description || ""}</td>`; 
+                html += "</tr>" 
+                t.innerHTML += html; 
+            }) </script>
+    </table>
+
+</body>
+</html>
